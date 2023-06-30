@@ -1,5 +1,9 @@
 # Considere X~Poisson(7) y Y|X~Binomial(x,0.3)
 
+//////////////////////////////////////////////
+//DISTRIBUCIONES DE PROBABILIDAD Y CONJUNTAS//
+//////////////////////////////////////////////
+
 # Siendo que x determina la cantidad de intentos que habrán en la binomial,
 # se podría calcular la probabilidad merginal de y como una Poisson con
 # el intervalo modificado por la probabilidad de la binomial:
@@ -47,6 +51,11 @@ dbinom(3, 6, 0.3) * dbinom(6, 12, 0.7) / dbinom(3, 12, 0.21)
 # Ojo que ese P(y|x) usa el y pedido para sacar probabilidades y que
 # el P(y) marginal es igual al anterior.
 
+
+////////////////////
+//NORMAL BIVARIADA//
+////////////////////
+
 # Considere:
 # (X,Y) ∼ NormalBivariada(µX,µY,σX,σY,ρ)
 # con µX = µY = 2, σX = 1, σY = 2, y ρ = 0.3. 
@@ -68,6 +77,11 @@ pmvnorm(lower = c(-Inf,-Inf), upper = c(2.3,Inf),
 # P(X > 1; Y < 2.3)
 pmvnorm(lower = c(1,-Inf), upper = c(Inf,2.3),
         mean = medias, sigma = matrizCov)[1]
+
+
+/////////////////////////////////////////////////////
+//TEOREMA DEL LIMITE CENTRAL APROXIMADO A LA NORMAL//
+/////////////////////////////////////////////////////
 
 # X1, . . . , X60 iid∼ Poisson(4)
 # calcular aproximadamente P(prom(X) ≤ 4.2). (Recordar corrección por continuidad)
@@ -96,6 +110,11 @@ pnorm(4.2, 4, 1/sqrt(45)) - pnorm(3, 4, sqrt(1)/sqrt(45))
 1 - pnorm(0.25-0.5/120, 0.2, sqrt(0.2*(1-0.2))/sqrt(120))
 # Se resta porque estamos restando en un principio, y p*(1-p) es la varianza
 # de la bernoulli
+
+
+/////////////////////
+//MÁXIMOS Y MINIMOS//
+/////////////////////
 
 # Si X1, . . . , X5 iid∼ Uniforme(3, 6), calcular la probabilidad 
 # P(X(5) > 5.5), donde X(5) = max{X1, . . . , X5}.
@@ -126,6 +145,13 @@ pexp(2, 0.5)^10
 library(readxl)
 ENS <- read_excel("ENS.xlsx")
 
+
+////////////////////////////////////////////
+//AJUSTE DE COEFICIENTES DE DISTRIBUCIONES//
+////////////////////////////////////////////
+
+// POR GRÁFICO //
+
 # Para la variable Colesterol (COLES), ajustar por gráfico de probabilidad una 
 # distribución LogNormal(λ, ζ).
 
@@ -154,6 +180,8 @@ lm(log(x) ~ qlogis(p))$coefficients
 # Ajustar una distribución Logística(µ, σ) a la presión arterial diastólica 
 # (PAD) por método de máxima verosimilitud.
 
+// POR MAX VEROSIMILITUD //
+
 # Para esto usaremos fitdeeznutz
 library(fitdistrplus)
 
@@ -162,6 +190,8 @@ fitdist(ENS$PAD, "logis", "mle")
 
 # Para la variable Colesterol (COLES), ajustar por máxima verosimilitud una 
 # distribución Gamma(k, ν)
+
+// POR MOMENTOS //
 
 fitdist(ENS$COLES, "gamma", "mle")
 # 20.8023593, 0.1068317

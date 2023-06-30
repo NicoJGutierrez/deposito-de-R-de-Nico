@@ -10,6 +10,11 @@ library(TeachingDemos)
 
 # Queremos saber si son mayores a 195 siempre.
 
+///////////////////////
+//PRUEBA DE HIPOTESIS//
+///////////////////////
+
+
 t.test(ENS$COLES, mu=195, alternative="greater")
 # los textos son requeridos
 # Aquí el p value es 0.6574, que es mayor a 0.05 por lo que se rechaza ha.
@@ -34,6 +39,8 @@ t.test(ENS$PAD, mu=75, alternative="two.sided")
 
 sigma.test(ENS$HDL, sigma=13, alternative="less")
 # Tenemos p = 0.01535 < a, por lo que se rechaza h0
+
+// PARA MULTIPLES DISTRIBUCIONES //
 
 # Considere el grupo de mujeres (SEXO = 2) y el grupo de hombres (SEXO = 1) por 
 # separado. ¿Se puede afirmar que los niveles de colesterol de alta densidad 
@@ -61,7 +68,8 @@ var.test(M$HDL, H$HDL, alternative = "two.sided")
 # Ha: M > H
 
 t.test(M$HDL, H$HDL, var.equal = FALSE, alternative = "greater", mu=0)[3]
-# No coincide con el solucionario, pero está bien igual
+
+// PROPORCIÓN //
 
 # ¿Se puede afirmar a partir de la muestra que la mayoría de la población no
 # fuma? (variable FUMADOR) Utilizar α = 5%.
@@ -83,6 +91,10 @@ diabeticos <- length(filter(ENS, DIABETES == 1)$DIABETES)
 prop.test(diabeticos, poblacion, 0.1, alternative = "greater")
 
 # no se puede respaldar (p value de 0.297)
+
+/////////////////////////
+//TEST BONDAD DE AJUSTE//
+/////////////////////////
 
 # Realizar un test de bondad de ajuste Log-Normal al nivel de colesterol 
 # (COLES). ¿Se puede asumir una distribución Log-Normal? Utilizar significancia 
